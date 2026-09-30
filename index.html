@@ -97,6 +97,7 @@
     .step-nav { order: 3; width: 100%; justify-content: center; }
   }
   .theme-btn { background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 17px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background .2s ease, transform .2s ease; }
+  .theme-btn .theme-ico { width: 22px; height: 22px; display: block; }
   .theme-btn:hover { background: var(--sage-soft); transform: rotate(-12deg); }
   .cart-btn { position: relative; background: var(--paper-raised); border: 1px solid var(--line); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 16px; }
   .cart-count { position: absolute; top: -6px; right: -6px; background: var(--accent); color: var(--on-accent); font-size: 10px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -236,7 +237,7 @@
       <button class="step-dot" data-page="payment" id="dotPay">Checkout</button>
     </div>
     <div class="nav-actions">
-      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode">&#9788;</button>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode"><svg class="theme-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="#FFC53D"/><g stroke="#FFC53D" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M5.1 5.1l1.8 1.8M17.1 17.1l1.8 1.8M5.1 18.9l1.8-1.8M17.1 6.9l1.8-1.8"/></g></svg></button>
       <button class="cart-btn" id="cartBtn" aria-label="Cart">&#128722;<span class="cart-count" id="cartCount" style="display:none;">1</span></button>
     </div>
   </div>
@@ -650,10 +651,12 @@
   document.getElementById('cartBtn').addEventListener('click', function(){ if (state.bag) goTo('payment'); });
 
   /* ---------- light / dark toggle ---------- */
+  var SUN_ICON = '<svg class="theme-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="#FFC53D"/><g stroke="#FFC53D" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M5.1 5.1l1.8 1.8M17.1 17.1l1.8 1.8M5.1 18.9l1.8-1.8M17.1 6.9l1.8-1.8"/></g></svg>';
+  var MOON_ICON = '<svg class="theme-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z" fill="#3552B8"/><circle cx="17.6" cy="5.2" r="1.1" fill="#3552B8"/><circle cx="20.4" cy="8.6" r="0.7" fill="#3552B8"/></svg>';
   var themeBtn = document.getElementById('themeBtn');
   function syncThemeBtn(){
     var light = document.documentElement.getAttribute('data-theme') === 'light';
-    themeBtn.innerHTML = light ? '&#9790;' : '&#9788;';
+    themeBtn.innerHTML = light ? MOON_ICON : SUN_ICON;
     var label = light ? 'Switch to dark mode' : 'Switch to light mode';
     themeBtn.setAttribute('aria-label', label); themeBtn.title = label;
   }
